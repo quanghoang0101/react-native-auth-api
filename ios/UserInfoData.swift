@@ -1,5 +1,5 @@
 #if swift(>=4.0)
-@objcMembers public class UserInfo: ElectrodeObject, Bridgeable {
+@objcMembers public class UserInfoData: ElectrodeObject, Bridgeable {
     private static let tag = String(describing: type(of: self))
 
     /**
@@ -27,13 +27,13 @@
         if let username = dictionary["username"] as? String {
             self.username = username
         } else {
-            assertionFailure("\(UserInfo.tag) missing one or more required properties [username]")
+            assertionFailure("\(UserInfoData.tag) missing one or more required properties [username]")
             self.username = dictionary["username"] as! String
         }
         if let phone = dictionary["phone"] as? String {
             self.phone = phone
         } else {
-            assertionFailure("\(UserInfo.tag) missing one or more required properties [phone]")
+            assertionFailure("\(UserInfoData.tag) missing one or more required properties [phone]")
             self.phone = dictionary["phone"] as! String
         }
 
@@ -53,7 +53,7 @@
 
 #else
 
-public class UserInfo: ElectrodeObject, Bridgeable {
+public class UserInfoData: ElectrodeObject, Bridgeable {
     private static let tag = String(describing: type(of: self))
 
     /**
@@ -81,13 +81,13 @@ public class UserInfo: ElectrodeObject, Bridgeable {
         if let username = dictionary["username"] as? String {
             self.username = username
         } else {
-            assertionFailure("\(UserInfo.tag) missing one or more required properties [username]")
+            assertionFailure("\(UserInfoData.tag) missing one or more required properties [username]")
             self.username = dictionary["username"] as! String
         }
         if let phone = dictionary["phone"] as? String {
             self.phone = phone
         } else {
-            assertionFailure("\(UserInfo.tag) missing one or more required properties [phone]")
+            assertionFailure("\(UserInfoData.tag) missing one or more required properties [phone]")
             self.phone = dictionary["phone"] as! String
         }
 

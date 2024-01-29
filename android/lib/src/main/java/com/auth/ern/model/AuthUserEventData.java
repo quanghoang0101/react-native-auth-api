@@ -27,36 +27,36 @@ import com.walmartlabs.electrode.reactnative.bridge.Bridgeable;
 
 import static com.walmartlabs.electrode.reactnative.bridge.util.BridgeArguments.*;
 
-public class AuthUser implements Parcelable, Bridgeable {
-    public static final Creator<AuthUser> CREATOR =
-            new Creator<AuthUser>() {
+public class AuthUserEventData implements Parcelable, Bridgeable {
+    public static final Creator<AuthUserEventData> CREATOR =
+            new Creator<AuthUserEventData>() {
                 @Override
-                public AuthUser createFromParcel(Parcel in) {
-                    return new AuthUser(in);
+                public AuthUserEventData createFromParcel(Parcel in) {
+                    return new AuthUserEventData(in);
                 }
 
                 @Override
-                public AuthUser[] newArray(int size) {
-                    return new AuthUser[size];
+                public AuthUserEventData[] newArray(int size) {
+                    return new AuthUserEventData[size];
                 }
             };
 
     private String token;
-    private UserInfo userInfo;
+    private UserInfoData userInfo;
 
-    private AuthUser() {
+    private AuthUserEventData() {
     }
 
-    private AuthUser(Builder builder) {
+    private AuthUserEventData(Builder builder) {
         this.token = builder.token;
         this.userInfo = builder.userInfo;
     }
 
-    private AuthUser(Parcel in) {
+    private AuthUserEventData(Parcel in) {
         this(in.readBundle());
     }
 
-    public AuthUser(@NonNull Bundle bundle) {
+    public AuthUserEventData(@NonNull Bundle bundle) {
         if (!bundle.containsKey("token")) {
             throw new IllegalArgumentException("token property is required");
         }
@@ -66,7 +66,7 @@ public class AuthUser implements Parcelable, Bridgeable {
         }
 
         this.token = bundle.getString("token");
-        this.userInfo = bundle.containsKey("userInfo") ? new UserInfo(bundle.getBundle("userInfo")) : null;
+        this.userInfo = bundle.containsKey("userInfo") ? new UserInfoData(bundle.getBundle("userInfo")) : null;
     }
 
     /**
@@ -80,7 +80,7 @@ public class AuthUser implements Parcelable, Bridgeable {
     }
 
     @NonNull
-    public UserInfo getUserInfo() {
+    public UserInfoData getUserInfo() {
         return userInfo;
     }
 
@@ -113,16 +113,16 @@ public class AuthUser implements Parcelable, Bridgeable {
 
     public static class Builder {
         private final String token;
-        private final UserInfo userInfo;
+        private final UserInfoData userInfo;
 
-        public Builder(@NonNull String token, @NonNull UserInfo userInfo) {
+        public Builder(@NonNull String token, @NonNull UserInfoData userInfo) {
             this.token = token;
             this.userInfo = userInfo;
         }
 
         @NonNull
-        public AuthUser build() {
-            return new AuthUser(this);
+        public AuthUserEventData build() {
+            return new AuthUserEventData(this);
         }
     }
 }

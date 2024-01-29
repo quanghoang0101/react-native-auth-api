@@ -28,13 +28,15 @@ import com.walmartlabs.electrode.reactnative.bridge.RequestHandlerHandle;
 import java.util.*;
 import java.util.UUID;
 
-import com.auth.ern.model.AuthUser;
+import com.auth.ern.model.AuthUserEventData;
 
 public final class AuthUserApi {
     private static final Requests REQUESTS;
+    private static final Events EVENTS;
 
     static {
         REQUESTS = new AuthUserRequests();
+        EVENTS = new AuthUserEvents();
     }
 
     private AuthUserApi() {
@@ -45,14 +47,23 @@ public final class AuthUserApi {
         return REQUESTS;
     }
 
+    @NonNull
+    public static Events events() {
+        return EVENTS;
+    }
+
+    public interface Events {
+        String EVENT_AUTH_USER_EVENT = "com.auth.ern.api.event.authUserEvent";
+
+        UUID addAuthUserEventEventListener(
+                @NonNull final ElectrodeBridgeEventListener<AuthUserEventData> eventListener);
+
+        ElectrodeBridgeEventListener<ElectrodeBridgeEvent> removeAuthUserEventEventListener(
+                @NonNull final UUID uuid);
+
+        void emitAuthUserEvent(@NonNull AuthUserEventData eventData);
+    }
+
     public interface Requests {
-        String REQUEST_AUTH_USER = "com.auth.ern.api.request.authUser";
-
-        RequestHandlerHandle registerAuthUserRequestHandler(
-                @NonNull final ElectrodeBridgeRequestHandler<AuthUser, None> handler);
-
-        void authUser(
-                AuthUser AuthInfo,
-                @NonNull final ElectrodeBridgeResponseListener<None> responseListener);
     }
 }

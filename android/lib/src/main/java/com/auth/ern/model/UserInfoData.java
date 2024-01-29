@@ -27,36 +27,36 @@ import com.walmartlabs.electrode.reactnative.bridge.Bridgeable;
 
 import static com.walmartlabs.electrode.reactnative.bridge.util.BridgeArguments.*;
 
-public class UserInfo implements Parcelable, Bridgeable {
-    public static final Creator<UserInfo> CREATOR =
-            new Creator<UserInfo>() {
+public class UserInfoData implements Parcelable, Bridgeable {
+    public static final Creator<UserInfoData> CREATOR =
+            new Creator<UserInfoData>() {
                 @Override
-                public UserInfo createFromParcel(Parcel in) {
-                    return new UserInfo(in);
+                public UserInfoData createFromParcel(Parcel in) {
+                    return new UserInfoData(in);
                 }
 
                 @Override
-                public UserInfo[] newArray(int size) {
-                    return new UserInfo[size];
+                public UserInfoData[] newArray(int size) {
+                    return new UserInfoData[size];
                 }
             };
 
     private String username;
     private String phone;
 
-    private UserInfo() {
+    private UserInfoData() {
     }
 
-    private UserInfo(Builder builder) {
+    private UserInfoData(Builder builder) {
         this.username = builder.username;
         this.phone = builder.phone;
     }
 
-    private UserInfo(Parcel in) {
+    private UserInfoData(Parcel in) {
         this(in.readBundle());
     }
 
-    public UserInfo(@NonNull Bundle bundle) {
+    public UserInfoData(@NonNull Bundle bundle) {
         if (!bundle.containsKey("username")) {
             throw new IllegalArgumentException("username property is required");
         }
@@ -126,8 +126,8 @@ public class UserInfo implements Parcelable, Bridgeable {
         }
 
         @NonNull
-        public UserInfo build() {
-            return new UserInfo(this);
+        public UserInfoData build() {
+            return new UserInfoData(this);
         }
     }
 }

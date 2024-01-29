@@ -1,14 +1,14 @@
 #if swift(>=4.0)
-@objcMembers public class AuthUser: ElectrodeObject, Bridgeable {
+@objcMembers public class AuthUserEventData: ElectrodeObject, Bridgeable {
     private static let tag = String(describing: type(of: self))
 
     /**
      Token to detect user is authorized
      */
     public let token: String
-    public let userInfo: UserInfo
+    public let userInfo: UserInfoData
 
-    public init(token: String, userInfo: UserInfo) {
+    public init(token: String, userInfo: UserInfoData) {
         self.token = token
         self.userInfo = userInfo
         super.init()
@@ -16,7 +16,7 @@
 
     public override init() {
         self.token = String()
-        self.userInfo = UserInfo()
+        self.userInfo = UserInfoData()
         super.init()
     }
 
@@ -24,14 +24,14 @@
         if let token = dictionary["token"] as? String {
             self.token = token
         } else {
-            assertionFailure("\(AuthUser.tag) missing one or more required properties [token]")
+            assertionFailure("\(AuthUserEventData.tag) missing one or more required properties [token]")
             self.token = dictionary["token"] as! String
         }
         if let userInfoDict = dictionary["userInfo"] as? [AnyHashable: Any] {
-            self.userInfo = UserInfo(dictionary: userInfoDict)
+            self.userInfo = UserInfoData(dictionary: userInfoDict)
         } else {
-            assertionFailure("\(AuthUser.tag) missing one or more required properties [userInfo]")
-            userInfo = dictionary["userInfo"] as! UserInfo
+            assertionFailure("\(AuthUserEventData.tag) missing one or more required properties [userInfo]")
+            userInfo = dictionary["userInfo"] as! UserInfoData
         }
 
 
@@ -50,16 +50,16 @@
 
 #else
 
-public class AuthUser: ElectrodeObject, Bridgeable {
+public class AuthUserEventData: ElectrodeObject, Bridgeable {
     private static let tag = String(describing: type(of: self))
 
     /**
      Token to detect user is authorized
      */
     public let token: String
-    public let userInfo: UserInfo
+    public let userInfo: UserInfoData
 
-    public init(token: String, userInfo: UserInfo) {
+    public init(token: String, userInfo: UserInfoData) {
         self.token = token
         self.userInfo = userInfo
         super.init()
@@ -67,7 +67,7 @@ public class AuthUser: ElectrodeObject, Bridgeable {
 
     public override init() {
         self.token = String()
-        self.userInfo = UserInfo()
+        self.userInfo = UserInfoData()
         super.init()
     }
 
@@ -75,14 +75,14 @@ public class AuthUser: ElectrodeObject, Bridgeable {
         if let token = dictionary["token"] as? String {
             self.token = token
         } else {
-            assertionFailure("\(AuthUser.tag) missing one or more required properties [token]")
+            assertionFailure("\(AuthUserEventData.tag) missing one or more required properties [token]")
             self.token = dictionary["token"] as! String
         }
         if let userInfoDict = dictionary["userInfo"] as? [AnyHashable: Any] {
-            self.userInfo = UserInfo(dictionary: userInfoDict)
+            self.userInfo = UserInfoData(dictionary: userInfoDict)
         } else {
-            assertionFailure("\(AuthUser.tag) missing one or more required properties [userInfo]")
-            self.userInfo = dictionary["userInfo"] as! UserInfo
+            assertionFailure("\(AuthUserEventData.tag) missing one or more required properties [userInfo]")
+            self.userInfo = dictionary["userInfo"] as! UserInfoData
         }
 
 

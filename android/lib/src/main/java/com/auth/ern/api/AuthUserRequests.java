@@ -28,22 +28,9 @@ import com.walmartlabs.electrode.reactnative.bridge.RequestProcessor;
 
 import java.util.*;
 
-import com.auth.ern.model.AuthUser;
+import com.auth.ern.model.AuthUserEventData;
 
 final class AuthUserRequests implements AuthUserApi.Requests {
     AuthUserRequests() {
-    }
-
-    @Override
-    public RequestHandlerHandle registerAuthUserRequestHandler(
-            @NonNull final ElectrodeBridgeRequestHandler<AuthUser, None> handler) {
-        return new RequestHandlerProcessor<>(REQUEST_AUTH_USER, AuthUser.class, None.class, handler).execute();
-    }
-
-    @Override
-    public void authUser(
-            AuthUser AuthInfo,
-            @NonNull final ElectrodeBridgeResponseListener<None> responseListener) {
-        new RequestProcessor<>(REQUEST_AUTH_USER, AuthInfo, None.class, responseListener).execute();
     }
 }

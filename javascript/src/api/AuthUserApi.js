@@ -1,11 +1,11 @@
 import {electrodeBridge} from 'react-native-electrode-bridge';
 
-import AuthUserRequests from './AuthUserRequests';
+import AuthUserEvents from './AuthUserEvents';
 
-const REQUESTS = new AuthUserRequests(electrodeBridge);
+const EVENTS = new AuthUserEvents(electrodeBridge);
 
-export function requests() {
-  return REQUESTS;
+export function events() {
+  return EVENTS;
 }
 
-export default {requests};
+export default {events};

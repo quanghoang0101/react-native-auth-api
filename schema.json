@@ -9,19 +9,20 @@
   ],
   "paths": {
     "/completed": {
-      "post": {
+      "event": {
         "tags": [
           "AuthUser"
         ],
-        "operationId": "authUser",
+        "operationId": "AuthUserEvent",
+        "description": "Fire this event when user is authenticated",
         "parameters": [
           {
-            "name": "AuthInfo",
+            "name": "eventData",
             "in": "body",
             "description": "Return user information",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AuthUser"
+              "$ref": "#/definitions/AuthUserEventData"
             }
           }
         ]
@@ -29,21 +30,21 @@
     }
   },
   "definitions": {
-    "AuthUser": {
+    "AuthUserEventData": {
       "properties": {
         "token": {
           "type": "string",
           "description": "Token to detect user is authorized"
         },
         "userInfo": {
-          "$ref": "#/definitions/UserInfo"
+          "$ref": "#/definitions/UserInfoData"
         }
       },
       "required": [
         "token", "userInfo"
       ]
     },
-    "UserInfo": {
+    "UserInfoData": {
       "properties": {
         "username": {
           "type": "string",

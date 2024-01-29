@@ -7,28 +7,28 @@
  * Do not edit the class manually.
  */
 
-import AuthUserRequests from '../../src/api/AuthUserRequests';
+import AuthUserEvents from '../../src/api/AuthUserEvents';
 
 describe('AuthUserApi', function () {
-  let requests;
+  let events;
   beforeEach(function () {
-    let requestHandler;
-    requests = new AuthUserRequests({
-      registerRequestHandler(name, handler) {
-        requestHandler = handler;
+    let eventListener;
+    events = new AuthUserEvents({
+      registerEventListener(name, listener) {
+        eventListener = listener;
       },
-      sendRequest(name, data) {
-        requestHandler && requestHandler(data);
-        return Promise.resolve(data);
+      emitEvent(name, data) {
+        eventListener && eventListener(data);
       },
     });
   });
 
-  describe('authUser', () => {
-    it('sends "authUser" request', () => {
-      return requests.authUser('id').then(response => {
-        expect(response).toEqual({data: 'id', timeout: undefined});
-      });
+  describe('authUserEvent', () => {
+    it('emits "authUserEvent" event', () => {
+      const listener = jest.fn();
+      events.addAuthUserEventEventListener(listener);
+      events.emitAuthUserEvent('id');
+      expect(listener).toHaveBeenCalledWith({data: 'id'});
     });
   });
 });

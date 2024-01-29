@@ -1,53 +1,65 @@
 #if swift(>=4.0)
 @objcMembers public class AuthUserAPI: NSObject {
-    static let kRequestAuthUser = "com.auth.ern.api.request.authUser"
+    static let kEventAuthUserEvent = "com.auth.ern.api.event.authUserEvent"
+
+    public lazy var events: AuthUserAPIEvents = {
+        AuthUserEvents()
+    }()
 
     public lazy var requests: AuthUserAPIRequests = {
         AuthUserRequests()
     }()
 }
 
-
-@objcMembers public class AuthUserAPIRequests: NSObject {
-    public func registerAuthUserRequestHandler(handler _: @escaping ElectrodeBridgeRequestCompletionHandler) -> UUID? {
+@objcMembers public class AuthUserAPIEvents: NSObject {
+    public func addAuthUserEventEventListener(eventListener _: @escaping ElectrodeBridgeEventListener) -> UUID? {
         assertionFailure("should override")
         return UUID()
     }
 
-    public func unregisterAuthUserRequestHandler(uuid _: UUID) -> ElectrodeBridgeRequestCompletionHandler? {
+    public func removeAuthUserEventEventListener(uuid _: UUID) -> ElectrodeBridgeEventListener? {
         assertionFailure("should override")
         return nil
     }
 
-    public func authUser(AuthInfo _: AuthUser, responseCompletionHandler _: @escaping (None?, ElectrodeFailureMessage?) -> Void) {
+    public func emitEventAuthUserEvent(eventData _: AuthUserEventData) {
         assertionFailure("should override")
     }
+}
+
+@objcMembers public class AuthUserAPIRequests: NSObject {
 }
 
 #else
 
 public class AuthUserAPI: NSObject {
-    static let kRequestAuthUser = "com.auth.ern.api.request.authUser"
+    static let kEventAuthUserEvent = "com.auth.ern.api.event.authUserEvent"
+
+    public lazy var events: AuthUserAPIEvents = {
+        AuthUserEvents()
+    }()
 
     public lazy var requests: AuthUserAPIRequests = {
         AuthUserRequests()
     }()
 }
 
-
-public class AuthUserAPIRequests: NSObject {
-    public func registerAuthUserRequestHandler(handler _: @escaping ElectrodeBridgeRequestCompletionHandler) -> UUID? {
+public class AuthUserAPIEvents: NSObject {
+    public func addAuthUserEventEventListener(eventListener _: @escaping ElectrodeBridgeEventListener) -> UUID? {
         assertionFailure("should override")
         return UUID()
     }
 
-    public func unregisterAuthUserRequestHandler(uuid _: UUID) -> ElectrodeBridgeRequestCompletionHandler? {
+    public func removeAuthUserEventEventListener(uuid _: UUID) -> ElectrodeBridgeEventListener? {
         assertionFailure("should override")
         return nil
     }
 
-    public func authUser(AuthInfo _: AuthUser, responseCompletionHandler _: @escaping ElectrodeBridgeResponseCompletionHandler) {
+    public func emitEventAuthUserEvent(eventData _: AuthUserEventData) {
         assertionFailure("should override")
     }
+}
+
+public class AuthUserAPIRequests: NSObject {
 }
 #endif
