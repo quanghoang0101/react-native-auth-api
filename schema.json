@@ -1,0 +1,63 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Electrode react native Auth api. ",
+    "title": "Electrode Native Auth"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/completed": {
+      "post": {
+        "tags": [
+          "AuthUser"
+        ],
+        "operationId": "authUser",
+        "parameters": [
+          {
+            "name": "AuthInfo",
+            "in": "body",
+            "description": "Return user information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthUser"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AuthUser": {
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "Token to detect user is authorized"
+        },
+        "userInfo": {
+          "$ref": "#/definitions/UserInfo"
+        }
+      },
+      "required": [
+        "token", "userInfo"
+      ]
+    },
+    "UserInfo": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Name of User"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Number phone of user"
+        }
+      },
+      "required": [
+        "username",
+        "phone"
+      ]
+    }
+  }
+}

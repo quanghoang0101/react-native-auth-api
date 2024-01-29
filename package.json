@@ -1,0 +1,22 @@
+{
+  "name": "react-native-auth-api",
+  "version": "1.0.0",
+  "description": "ERN Generated API for auth",
+  "main": "javascript/src/index.js",
+  "keywords": [
+    "ern-api"
+  ],
+  "author": "hoangphan",
+  "dependencies": {
+    "react-native-electrode-bridge": "^1.6.0"
+  },
+  "ern": {
+    "message": {
+      "namespace": "com.auth.ern",
+      "moduleName": "auth",
+      "apiSchemaPath": "schema.json",
+      "artifactId": "react-native-auth-api"
+    },
+    "moduleType": "ern-api"
+  }
+}
